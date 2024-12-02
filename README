@@ -1,0 +1,17 @@
+The provided starter code in main.cpp is a test driver that will automatically
+run your bubbleSort, insertionSort, and mergeSort implementations against all
+the data files in the /usr/share/CS1D/A1/data directory.
+
+The actual data files are given in the following format
+
+    number of elements in file
+    element1
+	 element2
+	 ...
+	 elementN
+    
+main.cpp will then cycle through all of the data files through the sorting
+functions that you have written. main.cpp will then verify that your 
+sorting solutions work and display metrics on the resources in time and
+memory that were consumed. main.cpp will abort the grading if any of passes
+produces an incorrectly sorted array.
