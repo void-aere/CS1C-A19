@@ -164,5 +164,6 @@ void bubbleSortMulti(long long *A, int n) {
 
 // The actual bubbleSort function: Calls one of the two impls.
 void bubbleSort(long long *A, int n) {
-    bubbleSortSimple(A, n);
+    //bubbleSortSimple(A, n);
+    bubbleSortMulti(A, n);
 }
