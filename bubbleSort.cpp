@@ -1,11 +1,29 @@
+/*
+# Multithread Bubble Sort
+
+## How does it work?
+- The driver creates as many threads as specified in N_THREADS
+- Each has a pointer to the work queue, which it will pull from when there's
+  work available
+- When a thread finds an out-of-order value, it knows the list might not be
+  sorted, so it contributes a new assgnment to the queue
+- Assignments consist of an absolute stopping point (hardstop), past which the
+  list is known to be sorted, and a soft stopping point (softstop), which
+  informs whichever thread takes it on as to the current position of this
+  thread. This allows each thread to ensure that it doesn't step on the previous
+  one's toes.
+ */
+
 #include "bubbleSort.h"
+#include <any>
 #include <cstdio>
 #include <mutex>
 #include <queue>
 #include <thread>
 #include <vector>
-#include <iostream>
 
+
+// Normalthreaded implementation
 void bubbleSortSimple(long long* A, int n) {
     long long temp;
     bool sorted;
@@ -25,7 +43,9 @@ void bubbleSortSimple(long long* A, int n) {
     }
 }
 
-const int N_THREADS = 10;
+
+// Multithreaded implementation
+const int N_THREADS = 6;
 
 std::mutex queueMutex;
 std::mutex doneMutex;
@@ -113,7 +133,7 @@ void bubbleThreadWorker(int id, long long *A, int n, std::queue<queueItem>* queu
     }
 }
 
-void bubbleSort(long long int A[], int n) {
+void bubbleSortMulti(long long *A, int n) {
     std::mutex* nextLock = new std::mutex;
     int* current = new int(-2);
 
@@ -130,4 +150,9 @@ void bubbleSort(long long int A[], int n) {
     for (auto &t : threads) {
         t.join();
     }
+}
+
+// The actual bubbleSort function: Calls one of the two impls.
+void bubbleSort(long long *A, int n) {
+    bubbleSortMulti(A, n);
 }
