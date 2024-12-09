@@ -15,7 +15,6 @@
  */
 
 #include "bubbleSort.h"
-#include <any>
 #include <cstdio>
 #include <mutex>
 #include <queue>
@@ -154,5 +153,5 @@ void bubbleSortMulti(long long *A, int n) {
 
 // The actual bubbleSort function: Calls one of the two impls.
 void bubbleSort(long long *A, int n) {
-    bubbleSortMulti(A, n);
+    bubbleSortSimple(A, n);
 }
