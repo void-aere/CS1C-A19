@@ -67,8 +67,8 @@ void bubbleThreadWorker(int id, long long *A, int n, std::queue<queueItem>* queu
             return;
         }
         doneMutex.unlock();
-        queueMutex.lock();
 
+        if (!queueMutex.try_lock()) continue;
         if (!queue->empty()) {
             // Claim the next assignment and release the mutex
             std::mutex* softlock = queue->front().softlock;
