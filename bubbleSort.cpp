@@ -1,12 +1,23 @@
 /*
 # Multithread Bubble Sort
+Dr. Barnett,
+    You're probably here because you noticed my Bubble Sort durations seemed 
+really weird. They are; that's because my bubble sort algorithm is multi-
+threaded. I spent a really long time hoping I would be able to make it faster
+by throwing more threads at it. Unfortunately, it's even slower than the simple 
+implementation. I still decided to use it because I put a lot of work into it,
+and becuase I find it really funny. I learned a lot about multithreading in the 
+prrocess so I'm still considering it a success!
+Note: I also completed a normal bubble sort algorithm in bubbleSortSimple() 
+      in case you want to see that. Also, the number of threads my code 
+      uses is defined in const int N_THREADS.
 
 ## How does it work?
-- The driver creates as many threads as specified in N_THREADS
+- The driver creates as many threads as specified in N_THREADS.
 - Each has a pointer to the work queue, which it will pull from when there's
-  work available
+  work available.
 - When a thread finds an out-of-order value, it knows the list might not be
-  sorted, so it contributes a new assgnment to the queue
+  sorted, so it contributes a new assgnment to the queue.
 - Assignments consist of an absolute stopping point (hardstop), past which the
   list is known to be sorted, and a soft stopping point (softstop), which
   informs whichever thread takes it on as to the current position of this
@@ -44,7 +55,7 @@ void bubbleSortSimple(long long* A, int n) {
 
 
 // Multithreaded implementation
-const int N_THREADS = 6;
+const int N_THREADS = 15;
 
 std::mutex queueMutex;
 std::mutex doneMutex;
